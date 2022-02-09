@@ -39,6 +39,34 @@ def open_file():
     # insert the read text
     text.insert(0.0, t)
 
+# font size
+def font_size_increase():
+    global text
+    size = int(text.font.cget("size"))
+    size = max(size + 2, 72)
+    text.font.configure(size=size)
+def font_size_decrease():
+    global text
+    size = int(text.font.cget("size"))
+    size = min(size - 2, 1)
+    text.font.configure(size=size)
+
+# font color
+def font_color_red():
+    pass
+def font_color_blue():
+    pass
+def font_color_green():
+    pass
+def font_color_black():
+    pass
+
+# font style
+def font_style_xxx():
+    pass
+
+
+
 # create the root
 root = Tk()
 # title
@@ -52,6 +80,8 @@ text.pack()
 
 # menu bar
 menubar = Menu(root)
+
+# file menu. operates on files
 filemenu = Menu(menubar)
 filemenu.add_command(label = "New", command = new_file)
 filemenu.add_command(label = "Open", command = open_file)
@@ -59,7 +89,30 @@ filemenu.add_command(label = "Save", command = save_file)
 filemenu.add_command(label = "Save As...", command = save_as)
 filemenu.add_separator()
 filemenu.add_command(label = "Quit", command = root.quit)
-menubar.add_cascade(filemenu)
+menubar.add_cascade(label = "File", menu = filemenu)
+
+# font menu
+fontmenu = Menu(menubar)
+# font size
+font_size = Menu(fontmenu)
+font_size.add_command(label = "+", command = font_size_increase)
+font_size.add_command(label = "-", command = font_size_decrease)
+fontmenu.add_cascade(label = "Size", menu = font_size)
+# font color
+font_color = Menu(fontmenu)
+font_color.add_command(label = "Red", command = font_color_red)
+font_color.add_command(label = "Blue", command = font_color_blue)
+font_color.add_command(label = "Green", command = font_color_green)
+font_color.add_command(label = "Black", command = font_color_black)
+fontmenu.add_cascade(label = "Color", menu = font_color)
+# font style
+font_style = Menu(fontmenu)
+font_style.add_command(label = "xxx", command = font_style_xxx)
+fontmenu.add_cascade(label = "Stype", menu = font_style)
+# add to the menu bar
+menubar.add_cascade(label = "Font", menu = fontmenu)
+
+
 
 root.config(menu = menubar)
 root.mainloop()
